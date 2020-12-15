@@ -87,10 +87,10 @@ export default function CheckForm({price, onSuccess}){
   return (
     <form onSubmit={handleSubmit} className={styles.checkform}>
 	  <ClientForm />
-	  {checkoutError}
       <CardElement options={cardElementOptions} onChange={handleCardDetailsChange}/>
+	  {checkoutError}
       <button type="submit" className={styles.btncheckform} disabled={isProcessing || !stripe}>
-		  {isProcessing ? 'Aguarde...' : `Total: R$${price}`}
+		  {isProcessing ? 'Processando...' : `R$ ${price}`}
       </button>
     </form>
   );

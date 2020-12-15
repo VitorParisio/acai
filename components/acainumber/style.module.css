@@ -18,3 +18,11 @@
     font-size: 20px;
     border:none;
 }
+
+.price{
+	position:absolute;
+	margin:250px 20px;
+	font-size:20px;
+	font-weight:bold;
+	color:darkviolet
+}
