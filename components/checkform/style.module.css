@@ -12,6 +12,7 @@
      background-color:rgba(75,0,130, 0.9);
 	 border:none;
 	 cursor:pointer;
+	 padding:10px;
  }
  
  .btncheckform:hover{
