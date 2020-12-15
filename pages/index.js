@@ -1,65 +1,36 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import AcaiNumber from '../components/acainumber'
+import CheckForm from '../components/checkform'
+import getAcaiPrice from '../utils/get-number-acai'
+import {useState} from 'react'
+import Router from "next/router";
 
-export default function Home() {
+
+const stripePromise = loadStripe('pk_test_51HyP7lK6h3MdWfr8JolWhGWGHOnyg32MMdetevAFuOAFBeMnObn8wfOwIR999OM2FyV1nhPUKvNNgrhf7yUqP1KR00g8Qj82ZD');
+
+const Home = (props) => {
+  const [number, setNumber] = useState(1)
+
+  const addNumber = () => setNumber(number + 1)
+  const removeNumber = () => setNumber(number - 1)
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+     <div className="container">
+      <Elements stripe={stripePromise}>
+          <AcaiNumber addNumber={addNumber} currentNumber={number} removeNumber={removeNumber}/>
+          <CheckForm price={getAcaiPrice(number)} onSuccess={() => Router.push("/success")}/>
+      </Elements>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <style jsx>{`
+        .container {
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+        }
+        .
+      `}</style>
     </div>
   )
 }
+export default Home

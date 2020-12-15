@@ -1,0 +1,10 @@
+.clientform{
+    display:flex;
+	flex-direction:column;
+	width:300px;
+}
+
+.clientdata{
+	width:100%;
+	height:30px;
+}
